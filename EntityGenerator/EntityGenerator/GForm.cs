@@ -86,8 +86,9 @@ namespace EntityGenerator
 
                     makeFile(path, ifpkg, clpkg, dbname, tname, defclassname, sbPersistence);
 
-                    sbService.Append("      <Service Id=\"").Append(serviceId).Append("\" Type=\"")
-                        .Append(sclpkg).Append(".").Append(sclassname).AppendLine("\" />");
+                    sbService.Append("      <Service Id=\"").Append(serviceId)
+                        .Append("\" Interface=\"").Append(sifpkg).Append(".").Append(sifname)
+                        .Append("\" Type=\"").Append(sclpkg).Append(".").Append(sclassname).AppendLine("\" />");
                         
 
                     string dr = defclassname + "DataRouter";
@@ -163,6 +164,8 @@ namespace EntityGenerator
             File.WriteAllText(xmlpath, sbPersistence.ToString());
             File.WriteAllText(tbPath.Text + "\\drouter.xml", sbRouter.ToString());
             File.WriteAllText(tbPath.Text + "\\service.xml", sbService.ToString());
+
+            MessageBox.Show("生成成功！");
         }
 
         private void startup()
@@ -495,7 +498,7 @@ namespace EntityGenerator
                         cmd.Dispose();
                 }
 
-                MessageBox.Show("生成成功！");
+               
 
             }
             catch (Exception e)
